@@ -1,11 +1,11 @@
-make-chatbot
-============
+make-chatterbot
+===============
 
 By Brandon Jackson
 
 Project started August 2014
 
-make-chatbot is a simple chatbot interface that makes it easy to combine the AIML interpreter `pyAIML` with the text-to-speech program `espeak`. This project began as part of a project to build experiments for the [Kano](http://kano.me) computer.
+make-chatterbot is a simple chatterbot interface that makes it easy to combine the AIML interpreter `pyAIML` with the text-to-speech program `espeak`. This project began as part of a project to build experiments for the [Kano](http://kano.me) computer.
 
 Usage
 -----
@@ -13,8 +13,8 @@ Usage
 - Make sure you have these dependencies installed:
 	- the `espeak` package
 	- the `pyAIML` Python package
-- Make sure `make-chatbot.py` is executable
-- From the terminal call `./make-chatbot.py`
+- Make sure `make-chatterbot.py` is executable
+- From the terminal call `./make-chatterbot.py`
 - When presented with a prompt, start the conversation!
 
 To-Do List
@@ -30,6 +30,7 @@ Links
 
 - [pyAIML Homepage](http://pyaiml.sourceforge.net/)
 - [eSpeak Homepage](http://espeak.sourceforge.net/)
+- [Chatterbot Wikipedia Page](http://en.wikipedia.org/wiki/Chatterbot)
 - [AIML Wikipedia Page](http://en.wikipedia.org/wiki/AIML)
 
 Credits
