@@ -17,6 +17,17 @@ Installation
 - From the terminal call `./make-chatterbot.py`
 - When presented with a prompt, start the conversation!
 
+**Example Installation Procedure (for Unix/Linux with apt-get installed)**
+
+```
+sudo apt-get install espeak espeak-data
+git clone git://pyaiml.git.sourceforge.net/gitroot/pyaiml/pyaiml
+cd pyaiml
+sudo python setup.py install
+cd ../
+sudo rm -R pyaiml
+```
+
 Usage
 -----
 
