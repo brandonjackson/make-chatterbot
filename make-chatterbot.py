@@ -10,6 +10,18 @@ import subprocess
 import os
 import sys
 
+BOT_PREDICATES = {
+    "name": "KanoBot",
+    "birthday": "January 1st 1969",
+    "location": "London",
+    "master": "Judoka",
+    "website":"https://github.com/brandonjackson/make-chatterbot",
+    "gender": "",
+    "age": "",
+    "size": "",
+    "religion": "",
+    "party": ""
+}
 # Make sure espeak exists
 try:
     subprocess.call(["espeak","-q","foo"]);
@@ -29,8 +41,9 @@ if os.path.isfile("standard.brn") is False:
 else:
     k.loadBrain("standard.brn")
  
-# Give the bot a name
-k.setBotPredicate("name", "KanoBot")
+# Give the bot a name and lots of other properties
+for key,val in BOT_PREDICATES.items():
+    k.setBotPredicate(key, val)
 
 # Start Infinite Loop
 while True:
