@@ -57,9 +57,8 @@ while True:
     print response
 
     # Output response as speech using espeak
-    # print commands.getoutput("/usr/bin/espeak -v en+f4 -p 99 -s 160 \"" + response + "\"")
     if ESPEAK_INSTALLED:
         try:
-            subprocess.call(["espeak","\""+response+"\""])
+            subprocess.call(["espeak", "-s", "140", "\""+response+"\""])
         except:
             print "Unexpected error:", sys.exc_info()[0]
