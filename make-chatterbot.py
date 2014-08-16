@@ -35,7 +35,7 @@ k = aiml.Kernel()
  
 # Load the AIML files on first load, and then save as "brain" for speedier startup
 if os.path.isfile("standard.brn") is False:
-    k.learn("std-startup.xml")
+    k.learn("aiml/standard/std-startup.xml")
     k.respond("load aiml b")
     k.saveBrain("standard.brn")
 else:
@@ -50,10 +50,8 @@ while True:
     # Prompt user for input
     input = raw_input("> ")
 
-    # Send input to bot
+    # Send input to bot and print chatbot's response
     response = k.respond(input)
-
-    # Print chatbot's response
     print response
 
     # Output response as speech using espeak
