@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-make-chatbot
+make-chatterbot
 by Brandon Jackson
 """
 
