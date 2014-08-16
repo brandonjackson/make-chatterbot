@@ -8,7 +8,7 @@ by Brandon Jackson
 import aiml
 import subprocess
 import os
-import sys
+import argparse
 
 BOT_PREDICATES = {
     "name": "KanoBot",
@@ -22,12 +22,33 @@ BOT_PREDICATES = {
     "religion": "",
     "party": ""
 }
+ESPEAK_ENABLED = True
+ESPEAK_SPEED = 140
+ESPEAK_PITCH = 50
+ESPEAK_VOICE = "en"
+
+# Parse arguments
+parser = argparse.ArgumentParser(description='a simple chatterbot interface')
+parser.add_argument("-v", "--voice", help="name of voice (default=en)")
+parser.add_argument("-p", "--pitch", help="voice pitch (1-100, default=50)")
+parser.add_argument("-s", "--speed", help="voice speed in words per minute (default=140)")
+parser.add_argument("-q", "--quiet", help="no audio output produced",
+                    action="store_true")
+args = parser.parse_args()
+if args.quiet:
+    ESPEAK_ENABLED = False
+if args.pitch:
+    ESPEAK_PITCH = args.pitch
+if args.speed:
+    ESPEAK_SPEED = args.speed
+if args.voice:
+    ESPEAK_VOICE = args.voice
+
 # Make sure espeak exists
 try:
-    subprocess.call(["espeak","-q","foo"]);
-    ESPEAK_INSTALLED = True
+    subprocess.call(["espeak","-q","foo"])
 except OSError:
-    ESPEAK_INSTALLED = False
+    ESPEAK_ENABLED = False
     print "Warning: espeak command not found, skipping voice generation"
 
 # Create Kernel
@@ -55,8 +76,6 @@ while True:
     print response
 
     # Output response as speech using espeak
-    if ESPEAK_INSTALLED:
-        try:
-            subprocess.call(["espeak", "-s", "140", "\""+response+"\""])
-        except:
-            print "Unexpected error:", sys.exc_info()[0]
+    if ESPEAK_ENABLED:
+        subprocess.call(["espeak", "-s", str(ESPEAK_SPEED), "-v", ESPEAK_VOICE,
+                             "-p", str(ESPEAK_PITCH), "\""+response+"\""])
