@@ -34,12 +34,12 @@ except OSError:
 k = aiml.Kernel()
  
 # Load the AIML files on first load, and then save as "brain" for speedier startup
-if os.path.isfile("standard.brn") is False:
+if os.path.isfile("cache/standard.brn") is False:
     k.learn("aiml/standard/std-startup.xml")
     k.respond("load aiml b")
-    k.saveBrain("standard.brn")
+    k.saveBrain("cache/standard.brn")
 else:
-    k.loadBrain("standard.brn")
+    k.loadBrain("cache/standard.brn")
  
 # Give the bot a name and lots of other properties
 for key,val in BOT_PREDICATES.items():
