@@ -10,9 +10,9 @@ make-chatterbot is a simple chatterbot interface that makes it easy to combine t
 Installation
 ------------
 
-- Make sure you have these dependencies installed:
+- Make sure you have these dependencies installed (see code snippet below for help):
     - the `espeak` package
-    - the `pyAIML` Python package
+    - the `pyAIML` Python package 
 - Make sure `make-chatterbot.py` is executable
 - From the terminal call `./make-chatterbot.py`
 - When presented with a prompt, start the conversation!
@@ -51,8 +51,11 @@ To-Do List
 ----------
 
 - Add header with cool ASCII image when first loaded
-- Make it easy to add custom AIML files
-- Add support for different TTS engines
+- Accept a list of AIML files (or a directory of files) to make it easy to load custom intelligences
+- Automatically re-build cache when new files detected
+- Add command line option to enable a tabula rassa (i.e. disable loading the standard AIML file set)
+- Add "teaching mode" that displays the AIML pattern that the input was matched to, so that the user can see what's going on beneath the hood
+- Add support for different TTS engines (e.g. Festival)
 
 Links
 -----
