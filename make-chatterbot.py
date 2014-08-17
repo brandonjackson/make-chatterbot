@@ -29,9 +29,9 @@ ESPEAK_VOICE = "en"
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='a simple chatterbot interface')
-parser.add_argument("-v", "--voice", help="name of voice (default=en)")
-parser.add_argument("-p", "--pitch", help="voice pitch (1-100, default=50)")
-parser.add_argument("-s", "--speed", help="voice speed in words per minute (default=140)")
+parser.add_argument("-v", "--voice", help="name of voice (default=%s)" % ESPEAK_VOICE)
+parser.add_argument("-p", "--pitch", help="voice pitch (1-100, default=%d)" % ESPEAK_PITCH)
+parser.add_argument("-s", "--speed", help="voice speed in words per minute (default=%d)" % ESPEAK_SPEED)
 parser.add_argument("-q", "--quiet", help="no audio output produced",
                     action="store_true")
 args = parser.parse_args()
