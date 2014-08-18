@@ -34,12 +34,13 @@ Usage
 -----
 
 ```
-usage: make-chatterbot.py [-h] [-v VOICE] [-p PITCH] [-s SPEED] [-q]
+usage: make-chatterbot.py [-h] [-m] [-v VOICE] [-p PITCH] [-s SPEED] [-q]
 
 a simple chatterbot interface
 
 optional arguments:
   -h, --help            show this help message and exit
+  -m, --show-matches    show matching patterns that generated the response
   -v VOICE, --voice VOICE
                         name of voice (default=en)
   -p PITCH, --pitch PITCH
