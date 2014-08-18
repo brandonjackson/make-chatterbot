@@ -20,6 +20,8 @@ Installation
 **Example Installation Procedure (for Unix/Linux with apt-get installed)**
 
 ```
+git clone https://github.com/brandonjackson/make-chatterbot.git
+cd make-chatterbot
 sudo apt-get install espeak espeak-data
 git clone git://pyaiml.git.sourceforge.net/gitroot/pyaiml/pyaiml
 cd pyaiml
