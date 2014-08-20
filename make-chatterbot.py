@@ -85,7 +85,7 @@ while True:
     if SHOW_MATCHES:
         print "Matched Pattern: "
         print k.formatMatchedPattern(matchedPattern[0])
-    print "Response: "
+        print "Response: "
     print response
 
     # Output response as speech using espeak
