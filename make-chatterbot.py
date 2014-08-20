@@ -53,6 +53,7 @@ if args.voice:
 # Make sure espeak exists
 try:
     subprocess.call(["espeak","-q","foo"])
+    DEVNULL = open(os.devnull, 'wb')
 except OSError:
     ESPEAK_ENABLED = False
     print "Warning: espeak command not found, skipping voice generation"
@@ -91,4 +92,5 @@ while True:
     # Output response as speech using espeak
     if ESPEAK_ENABLED:
         subprocess.call(["espeak", "-s", str(ESPEAK_SPEED), "-v", ESPEAK_VOICE,
-                             "-p", str(ESPEAK_PITCH), "\""+response+"\""])
+                             "-p", str(ESPEAK_PITCH), "\""+response+"\""],
+                        stderr=DEVNULL)
