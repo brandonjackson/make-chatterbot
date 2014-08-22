@@ -34,6 +34,7 @@ DEVNULL = open(os.devnull, 'wb')
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='a simple chatterbot interface')
+parser.add_argument("file",help="custom AIML file (or directory of files) to load",nargs="*")
 parser.add_argument("-m", "--show-matches", help="show matching patterns that generated the response",
                     action="store_true", dest='matches')
 parser.add_argument("-v", "--voice", help="name of voice (default=%s)" % TTS_VOICE)

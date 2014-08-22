@@ -36,8 +36,12 @@ Usage
 ```
 usage: make-chatterbot.py [-h] [-m] [-v VOICE] [-p PITCH] [-s SPEED]
                           [-e ENGINE] [-q]
+                          [file [file ...]]
 
 a simple chatterbot interface
+
+positional arguments:
+  file                  custom AIML file (or directory of files) to load
 
 optional arguments:
   -h, --help            show this help message and exit
