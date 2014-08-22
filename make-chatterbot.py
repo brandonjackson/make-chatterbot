@@ -33,7 +33,12 @@ SHOW_MATCHES = False
 DEVNULL = open(os.devnull, 'wb')
 
 # Parse arguments
-parser = argparse.ArgumentParser(description='a simple chatterbot interface')
+parser = argparse.ArgumentParser(description="""A simple chatterbot interface. The program
+    'learns' conversational rules from .aiml files, and then allows the user to interact
+    with the chatterbot. By default the bot's response is output to the espeak text-to-speech
+    (TTS) engine, although other TTS programs are supported using the -e flag. Custom aiml
+    files can be loaded using the file positional arguments. If they are provided then the 
+    default AIML file set will not be loaded.""")
 parser.add_argument("file",help="custom AIML file (or directory of files) to load",nargs="*")
 parser.add_argument("-m", "--show-matches", help="show matching patterns that generated the response",
                     action="store_true", dest='matches')
