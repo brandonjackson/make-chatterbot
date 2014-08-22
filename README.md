@@ -34,7 +34,8 @@ Usage
 -----
 
 ```
-usage: make-chatterbot.py [-h] [-m] [-v VOICE] [-p PITCH] [-s SPEED] [-q]
+usage: make-chatterbot.py [-h] [-m] [-v VOICE] [-p PITCH] [-s SPEED]
+                          [-e ENGINE] [-q]
 
 a simple chatterbot interface
 
@@ -47,6 +48,8 @@ optional arguments:
                         voice pitch (1-100, default=50)
   -s SPEED, --speed SPEED
                         voice speed in words per minute (default=140)
+  -e ENGINE, --engine ENGINE
+                        text-to-speech program (default=espeak)
   -q, --quiet           no audio output produced
 ```
 
@@ -57,8 +60,7 @@ To-Do List
 - Accept a list of AIML files (or a directory of files) to make it easy to load custom intelligences
 - Automatically re-build cache when new files detected
 - Add command line option to enable a tabula rassa (i.e. disable loading the standard AIML file set)
-- Add "teaching mode" that displays the AIML pattern that the input was matched to, so that the user can see what's going on beneath the hood
-- Add support for different TTS engines (e.g. Festival)
+- Add support for festival TTS engine
 
 Links
 -----

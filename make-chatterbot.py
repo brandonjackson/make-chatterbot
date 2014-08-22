@@ -23,40 +23,49 @@ BOT_PREDICATES = {
     "religion": "",
     "party": ""
 }
-ESPEAK_ENABLED = True
-ESPEAK_SPEED = 140
-ESPEAK_PITCH = 50
-ESPEAK_VOICE = "en"
+TTS_ENABLED = True
+TTS_ENGINE = "espeak"
+TTS_SPEED = 140
+TTS_PITCH = 50
+TTS_VOICE_DEFAULT = "en"
+TTS_VOICE = "en" # default only passed if using espeak
 SHOW_MATCHES = False
+DEVNULL = open(os.devnull, 'wb')
 
 # Parse arguments
 parser = argparse.ArgumentParser(description='a simple chatterbot interface')
 parser.add_argument("-m", "--show-matches", help="show matching patterns that generated the response",
                     action="store_true", dest='matches')
-parser.add_argument("-v", "--voice", help="name of voice (default=%s)" % ESPEAK_VOICE)
-parser.add_argument("-p", "--pitch", help="voice pitch (1-100, default=%d)" % ESPEAK_PITCH)
-parser.add_argument("-s", "--speed", help="voice speed in words per minute (default=%d)" % ESPEAK_SPEED)
+parser.add_argument("-v", "--voice", help="name of voice (default=%s)" % TTS_VOICE)
+parser.add_argument("-p", "--pitch", help="voice pitch (1-100, default=%d)" % TTS_PITCH)
+parser.add_argument("-s", "--speed", help="voice speed in words per minute (default=%d)" % TTS_SPEED)
+parser.add_argument("-e", "--engine", help="text-to-speech program (default=espeak)")
 parser.add_argument("-q", "--quiet", help="no audio output produced",
                     action="store_true")
 args = parser.parse_args()
 if args.matches:
     SHOW_MATCHES = True
 if args.quiet:
-    ESPEAK_ENABLED = False
+    TTS_ENABLED = False
 if args.pitch:
-    ESPEAK_PITCH = args.pitch
+    TTS_PITCH = args.pitch
 if args.speed:
-    ESPEAK_SPEED = args.speed
+    TTS_SPEED = args.speed
 if args.voice:
-    ESPEAK_VOICE = args.voice
+    TTS_VOICE = args.voice
+if args.engine:
+    TTS_ENGINE = args.engine
 
 # Make sure espeak exists
-try:
-    subprocess.call(["espeak","-q","foo"])
-    DEVNULL = open(os.devnull, 'wb')
-except OSError:
-    ESPEAK_ENABLED = False
-    print "Warning: espeak command not found, skipping voice generation"
+if TTS_ENGINE == "espeak":
+    try:
+        subprocess.call(["espeak","-q","foo"])
+    except OSError:
+        TTS_ENABLED = False
+        print "Warning: espeak command not found, skipping voice generation"
+else:
+    # non-espeak TTS engine being used
+    pass
 
 # Create Kernel (using our custom version of the aiml kernel class)
 k = MyKernel()
@@ -90,7 +99,22 @@ while True:
     print response
 
     # Output response as speech using espeak
-    if ESPEAK_ENABLED:
-        subprocess.call(["espeak", "-s", str(ESPEAK_SPEED), "-v", ESPEAK_VOICE,
-                             "-p", str(ESPEAK_PITCH), "\""+response+"\""],
+    if TTS_ENABLED is False:
+        pass
+    elif TTS_ENGINE == "espeak":
+        subprocess.call(["espeak", "-s", str(TTS_SPEED), "-v", TTS_VOICE,
+                             "-p", str(TTS_PITCH), "\""+response+"\""],
                         stderr=DEVNULL)
+
+    # Output response as speech using say
+    elif TTS_ENGINE == "say":
+        args = ["say","-r", str(TTS_SPEED)]
+        if TTS_VOICE_DEFAULT!=TTS_VOICE:
+            args.append("-v")
+            args.append(TTS_VOICE)
+        args.append("\""+response+"\"")
+        subprocess.call(args)
+
+    # Output response as speech using unsupported TTS engine
+    else:
+        subprocess.call([TTS_ENGINE, "\""+response+"\""])
