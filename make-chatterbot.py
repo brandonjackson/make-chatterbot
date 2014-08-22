@@ -71,13 +71,33 @@ else:
 # Create Kernel (using our custom version of the aiml kernel class)
 k = MyKernel()
  
-# Load the AIML files on first load, and then save as "brain" for speedier startup
-if os.path.isfile("cache/standard.brn") is False:
-    k.learn("aiml/standard/std-startup.xml")
-    k.respond("load aiml b")
-    k.saveBrain("cache/standard.brn")
+if not args.file:
+    # Load the AIML files on first load, and then save as "brain" for speedier startup
+    if os.path.isfile("cache/standard.brn") is False:
+        k.learn("aiml/standard/std-startup.xml")
+        k.respond("load aiml b")
+        k.saveBrain("cache/standard.brn")
+    else:
+        k.loadBrain("cache/standard.brn")
+
+# Using Custom AIML Files
 else:
-    k.loadBrain("cache/standard.brn")
+    # Generating list of files to learn
+    customFiles = []
+    for filename in args.file:
+        if os.path.isfile(filename):
+            customFiles.append(filename)
+        elif os.path.isdir(filename):
+            dirFiles = os.listdir(filename)
+            for df in dirFiles:
+                (base,ext) = os.path.splitext(df)
+                if ext.lower() == ".aiml":
+                    customFiles.append(filename + "/" + df)
+    # Learn each custom file
+    print "Learning %d Custom Files..." % len(customFiles)
+    for aimlFile in customFiles:
+        k.learn(aimlFile)
+    # @todo save custom files to .brn cache
  
 # Give the bot a name and lots of other properties
 for key,val in BOT_PREDICATES.items():
